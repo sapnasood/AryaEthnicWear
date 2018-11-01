@@ -1,0 +1,18 @@
+/* #navwrapper{
+
+    height: 100px;
+    padding-top: 8px;
+    padding-left: 20px;
+} */
+
+
+
+.slider.style {
+    position: relative;
+    height: 800px;
+    width: 100%;
+}
+
+/* element.style {
+    height: 800px;
+} */
