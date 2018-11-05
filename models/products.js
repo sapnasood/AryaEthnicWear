@@ -17,8 +17,19 @@ module.exports = function(sequelize, DataTypes){
           },
          stock_quantity:{
             type: DataTypes.INTEGER  
-          }
+          },
+         product_type:{
+           type: DataTypes.STRING
+         } 
        } 
      )
+
+Products.associate = function(models){
+  Products.hasMany(models.Cart_data, {
+    onDelete: 'cascade'
+  
+  })
+}
+
      return Products;
     };
