@@ -4,6 +4,15 @@ $(document).ready(function(){
     $('.dropdown-trigger').dropdown();
     $('#modal1').modal();
     $('select').formSelect();
+    $(window).scroll(function(){
+        console.log($(window).scrollTop());
+        if($(window).scrollTop() > 50){
+            $('nav').addClass('sticky-nav');
+        }
+        else{
+            $('nav').removeClass('sticky-nav');
+        }
+    })
   });
 
 
@@ -61,12 +70,12 @@ $(document).ready(function(){
    } 
    else{quantity = 'Out of Stock'};
    
-   let price = $('<p>').text(`$ ${item.retail_price}` + "                  " +`${quantity}`);
+   let price = $('<p>').text(`$ ${item.retail_price}` + " " +`${quantity}`);
    
    cardCon.append(price);
    
    let cardAction = $('<div>').addClass('card-action');
-   let prodLink = $(`<a class="product waves-effect waves-light btn modal-trigger" href ="#modal1" data-id=${item.id}>`).text(item.product_name);
+   let prodLink = $(`<a class="product waves-effect waves-light btn" href ="#modal1" data-id=${item.id}>`).text(item.product_name);
    cardAction.append(prodLink);
    cardDiv.append(cardImg, cardCon, cardAction);
    col.append(cardDiv);
@@ -143,31 +152,6 @@ $.ajax({
 
 };
 
-
-
-// const checkoutPage = function(productData){
-// let header = $('<h1>')
-// header.text('MY SHOPPING CART');
-// $('#mainDiv').append(header);
-// let row = $('<div>').addClass('row center-cols center-align');
-// let col1 = $('<div>').addClass('col m4');
-// let col2 = $('<div>').addClass('col m4');
-// // Create a table
-// let table = $('<table>');
-// let thead = $('<thead>');
-// let tr = $('<tr>');
-// let th1 = $('<th>').text('PRODUCT');
-// let th2 = $('<th>').text('TITLE');
-// let th3 = $('<th>').text('QUANTITY');
-// let th4 = $('<th>').text('PRICE');
-// let th5 = $('<th>').text('REMOVE');
-// tr.append(th1, th2, th3, th4, th5);
-// thead.append(tr);
-// table.append(thead);
-// $('#mainDiv').append(table)
-// };
-
-
 const getCart = function(event){
     event.preventDefault();
     
@@ -178,13 +162,14 @@ const getCart = function(event){
             console.log(productData)
             $('#mainDiv').empty();
             let subtotal = 0;
-            let header = $('<h2>').addClass('center');
+            let header = $('<h1>').addClass('center');
             header.text('MY SHOPPING CART');
             $('#mainDiv').append(header);
             let row = $('<div>').addClass('row');
             let col1 = $('<div>').addClass('col m6');
 // Create a table header
             let table = $('<table>').addClass('table table table-shopping-cart');
+            table.attr('id','table');
             let thead = $('<thead>');
             let tr = $('<tr>');
             let th1 = $('<th>').text('PRODUCT');
@@ -233,6 +218,27 @@ subtotal += price;
 td4.append(price);
 tr1.append(td4); 
 tbody.append(tr1);
+
+// Add remove icon 
+removeBtn = $(`<a class="waves-effect waves-teal btn-flat" id="remove">`);
+removeBtn.text("Remove");
+removeBtn.on('click',function(event){
+event.preventDefault();
+let table = document.getElementById('table');
+let index = 0;
+
+for(let i = 0; i < table.rows.length; i++){
+  table.rows[i].cells[4].onclick = function()
+  {
+      index = this.parentElement.rowIndex;
+      table.deleteRow(index);
+  }
+}
+
+})
+td5.append(removeBtn);
+tr1.append(td5);
+tbody.append(tr1);
 };
 
 table.append(tbody);
@@ -242,18 +248,27 @@ let col2 = $('<div>').addClass('col m6');
 let subTotal = $('<h5>').text(`SUBTOTAL: $ ${subtotal}`);
 col2.append(subTotal);
 
-let checkOutBtn = $("<a>").addClass('waves-effect waves-light btn checkout');
+
+let checkOutBtn = $(`<a class="waves-effect waves-light btn" id="checkout">`)
 checkOutBtn.text('CHECKOUT')
+checkOutBtn.on('click',function(event){
+        event.preventDefault();
+        let table = document.getElementById('table');
+        for(let i = 0; i < table.rows.length; i++)
+        {
+        
+            console.log(table.rows[i].cells[2].innerHTML);
+        }
+    
+
+
+})
 col2.append(checkOutBtn);
 row.append(col2);
 
 $('#mainDiv').append(row);
 
-
 })};
-        
-
-
 
 
 $('#clothing').on('click', selectDepartment);
@@ -264,3 +279,4 @@ $('#lehengas').on('click',selectProductName);
 $('#rental').on('click', selectDepartment );
 $('#add_cart').on('click', addToCart);
 $('#getcart').on('click',getCart);
+// $('#table').on('click','#remove',removeItem);

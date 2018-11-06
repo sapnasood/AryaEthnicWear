@@ -1,40 +1,3 @@
-#colImg,#colDetails{
-
-    border: 2px solid pink;
-    width: 500px;
-    height: 770px;
-}
-
-/* body {
-    position: relative;
-    background: #5C97FF;
-    overflow: hidden;
-} */
-/* body:after {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0.5;
-    background-image: url('https://fscomps.fotosearch.com/compc/CSP/CSP747/gold-jewelry-background-stock-images__k7477836.jpg');
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
-} */
-
-
-element.style {
-    height: 600px;
-}
-
 .modal {
     display: none;
     position: fixed;
@@ -50,6 +13,49 @@ element.style {
     will-change: top, opacity;
 }  
 
-/* #col1{
-    margin-right: 5px;
-} */
+.header{
+    background-color: black;
+    color: white;
+    font-size: medium;
+    height: 50px;
+    padding-top: 1px; 
+    padding-bottom: 1px; 
+}
+
+.logo{
+    height: 120px;
+}
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    margin-left: 35%;
+}
+
+.btn{
+    background: gray;
+}
+
+.sticky-nav{
+    position:fixed;
+    top:0;
+}
+
+#navbar{
+    background:white;
+}
+
+footer{
+    background: gray;
+    padding: 20px;
+
+}
+
+h1{
+    font-family: "Lora", serif ;
+    font-size: 40px;
+}
+
+h5{
+    font-weight: bold;
+    font-size: 20px;
+}
